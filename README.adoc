@@ -1,0 +1,8 @@
+= mikutter cli
+CLI tool for mikutter
+
+== Usage
+TODO: write instructions
+
+== Status
+WIP: lot's of things to do

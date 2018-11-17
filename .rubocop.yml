@@ -1,0 +1,56 @@
+AllCops:
+  TargetRubyVersion: 2.3
+
+Naming/VariableNumber:
+  Enabled: false
+
+Naming/VariableName:
+  Enabled: false
+
+Style/EmptyCaseCondition:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Naming/AsciiIdentifiers:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/LineLength:
+  Description: 'Limit lines to 140 characters.'
+  StyleGuide: '#140-character-limits'
+  Max: 140
+  Enabled: true
+
+Style/GlobalVars:
+  Enabled: false
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/RescueModifier:
+  Enabled: false
+
+FormatString:
+  EnforcedStyle: percent
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+Style/RescueStandardError:
+  Enabled: false
