@@ -6,3 +6,6 @@ TODO: write instructions
 
 == Status
 WIP: lot's of things to do
+
+== License
+This project is available as open source under the terms of the link:/LICENSE[MIT License].
