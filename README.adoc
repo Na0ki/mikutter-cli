@@ -3,6 +3,9 @@ CLI tool for mikutter
 
 == Usage
 TODO: write instructions
+```sh
+$ bundle exec ruby cli.rb new PLUGIN_NAME
+```
 
 == Status
 WIP: lot's of things to do
