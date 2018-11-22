@@ -64,7 +64,9 @@ class CLI < Thor
     end
 
     def git_init(dir)
-      o, e, s = Open3.capture3("cd #{dir.to_s.shellescape} && git init") if @git
+      return unless @git
+
+      o, e, s = Open3.capture3("cd #{dir.to_s.shellescape} && git init")
       puts s.success? ? o : e
     end
   end
