@@ -12,12 +12,11 @@ class Depends < Diva::Model
 
   def initialize
     @plugin = []
-    @mikutter = '3.6'
     @cli = HighLine.new
   end
 
   def ask
-    @mikutter = @cli.ask('What mikutter version do you need?') { |q| q.default = @mikutter unless @mikutter.nil? }
+    @mikutter ||= @cli.ask('What mikutter version do you need?') { |q| q.default = '3.6' }
   end
 
   def to_h

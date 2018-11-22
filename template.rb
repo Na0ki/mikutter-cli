@@ -33,13 +33,14 @@ module MikutterCLI
       # generate plugin
       # @param filename
       # @param model
-      def generate_plugin(filename, model)
+      def generate_plugin(filename, model, git = false)
         plugin = load filename, model
         plugin_dir = conf_root / 'plugin' / model.slug
         FileUtils.mkdir_p(plugin_dir)
         File.open(plugin_dir / '.mikutter.yml', 'w') { |f| YAML.dump model.to_h_k_s, f }
         File.open(plugin_dir / "#{model.slug}.rb", 'w') { |f| f.puts plugin }
         puts "Plugin has been generated at #{plugin_dir}"
+        plugin_dir
       rescue StandardError => e
         p e
       end

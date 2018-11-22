@@ -2,7 +2,8 @@
 
 require 'thor'
 require 'yaml'
-require 'highline'
+require 'open3'
+require 'shellwords'
 
 require_relative '../model'
 require_relative '../template'
@@ -12,7 +13,12 @@ require_relative '../model/depends'
 # generate plugin & plugin config
 class CLI < Thor
   desc 'new PLUGIN_NAME', 'Creates a new plugin'
-  options name: :required
+  method_option :name, type: :string
+  method_option :author, type: :string
+  method_option :description, type: :string, aliases: '-d'
+  method_option :version, type: :string
+  method_option :mikutter, type: :string
+  method_option :git, type: :boolean, default: true
   def new(slug)
     help = options[:help]
 
@@ -25,6 +31,7 @@ class CLI < Thor
       @author = options[:author]
       @description = options[:description]
       @mikutter = options[:mikutter]
+      @git = options[:git]
 
       generate
     end
@@ -46,18 +53,19 @@ class CLI < Thor
 
       puts "Configuring #{@slug}"
 
-      loop do
-        config.ask
+      config.ask
 
-        puts 'Check your config!'
-        puts ''
-        puts config.to_h_k_s.to_yaml
-        puts ''
+      puts ''
+      puts config.to_h_k_s.to_yaml
+      puts ''
 
-        break if HighLine.new.agree 'Ready to start?'
-      end
+      dir = MikutterCLI::Template.generate_plugin 'plugin.erb', config
+      git_init dir
+    end
 
-      MikutterCLI::Template.generate_plugin 'plugin.erb', config
+    def git_init(dir)
+      o, e, s = Open3.capture3("cd #{dir.to_s.shellescape} && git init") if @git
+      puts s.success? ? o : e
     end
   end
 end

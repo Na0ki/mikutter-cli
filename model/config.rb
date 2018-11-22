@@ -23,15 +23,14 @@ class Config < Diva::Model
   def initialize
     @cli = HighLine.new
     @depends = Depends.new
-    @version = '0.0.1'
   end
 
   def ask
-    @slug = @cli.ask('What is your plugin slug?') { |q| q.default = @slug unless @slug.nil? }
-    @name = @cli.ask('What is your plugin name?') { |q| q.default = @name unless @name.nil? }
-    @version = @cli.ask('What is your plugin version?') { |q| q.default = @version unless @version.nil? }
-    @author = @cli.ask('Who is the author?') { |q| q.default = @author unless @author.nil? }
-    @description = @cli.ask('Tell me what is this plugin for?') { |q| q.default = @description unless @description.nil? }
+    @slug ||= @cli.ask('What is your plugin slug?') { |q| q.default = @slug unless @slug.nil? }
+    @name ||= @cli.ask('What is your plugin name?') { |q| q.default = @name unless @name.nil? }
+    @version ||= @cli.ask('What is your plugin version?') { |q| q.default = '0.0.1' }
+    @author ||= @cli.ask('Who is the author?') { |q| q.default = @author unless @author.nil? }
+    @description ||= @cli.ask('Tell me what is this plugin for?') { |q| q.default = @description unless @description.nil? }
     @depends.ask
   end
 
