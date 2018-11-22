@@ -1,21 +1,23 @@
 # frozen_string_literal: true
 
 require 'diva'
+require 'highline'
 
 # Model for Depends used in Config
 class Depends < Diva::Model
   field.string :mikutter
   field.string :plugin
 
+  attr_writer :mikutter
+
   def initialize
     @plugin = []
+    @mikutter = '3.6'
+    @cli = HighLine.new
   end
 
-  def ask(cli)
-    @mikutter = cli.ask 'What mikutter version do you need?' do |q|
-      q.validate = /\d\.\d(\.\d)?/
-      q.default = @mikutter.nil? ? '3.6' : @mikutter
-    end
+  def ask
+    @mikutter = @cli.ask('What mikutter version do you need?') { |q| q.default = @mikutter unless @mikutter.nil? }
   end
 
   def to_h

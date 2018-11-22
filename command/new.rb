@@ -9,39 +9,55 @@ require_relative '../template'
 require_relative '../model/config'
 require_relative '../model/depends'
 
-# execute
-def run
-  cli = HighLine.new
-  config = Config.new
-  depends = Depends.new
-
-  loop do
-    config.ask cli
-    depends.ask cli
-
-    config.depends = depends
-
-    cli.say 'Check your config!'
-
-    cli.say config.to_h_k_s.to_yaml
-
-    break if cli.agree 'Ready to start?'
-  end
-
-  MikutterCLI::Template.generate_plugin 'plugin.erb', config
-end
-
+# generate plugin & plugin config
 class CLI < Thor
   desc 'new PLUGIN_NAME', 'Creates a new plugin'
-  method_option :help, aliases: '-h', desc: 'show help'
-  def new(plugin_name)
+  options name: :required
+  def new(slug)
     help = options[:help]
 
     if help
       # TODO: show help
     else
-      puts "Configuring #{plugin_name}"
-      run
+      @slug = slug
+      @name = options[:name]
+      @version = options[:version]
+      @author = options[:author]
+      @description = options[:description]
+      @mikutter = options[:mikutter]
+
+      generate
+    end
+  end
+
+
+  no_commands do
+    private
+
+    # ask & generate plugin config
+    def generate
+      config = Config.new
+      config.slug = @slug
+      config.name = @name
+      config.version = @version
+      config.author = @author
+      config.description = @description
+      config.depends.mikutter = @mikutter
+
+      puts "Configuring #{@slug}"
+
+      loop do
+        config.ask
+
+        puts 'Check your config!'
+        puts ''
+        puts config.to_h_k_s.to_yaml
+        puts ''
+
+        break if HighLine.new.agree 'Ready to start?'
+      end
+
+      MikutterCLI::Template.generate_plugin 'plugin.erb', config
     end
   end
 end
