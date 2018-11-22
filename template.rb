@@ -2,6 +2,7 @@
 
 require 'erb'
 require 'fileutils'
+require 'ostruct'
 require 'pathname'
 require 'yaml'
 
