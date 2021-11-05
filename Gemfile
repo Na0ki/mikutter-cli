@@ -2,8 +2,8 @@
 
 source 'https://rubygems.org'
 
-gem 'diva', '~> 0.3.2'
-gem 'highline', '~> 1.7', '>= 1.7.8'
+gem 'diva', '~> 1.1.1'
+gem 'highline', '~> 2.0.3'
 gem 'thor', '~> 0.19.1'
 
 group :development do
