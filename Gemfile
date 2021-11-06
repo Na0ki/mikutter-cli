@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gem 'diva', '~> 1.1.1'
 gem 'highline', '~> 2.0.3'
-gem 'thor', '~> 0.19.1'
+gem 'thor', '~> 1.1.0'
 
 group :development do
   gem 'rubocop', '~> 0.60.0'

@@ -23,7 +23,7 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.4.0)
     ruby-progressbar (1.11.0)
-    thor (0.19.4)
+    thor (1.1.0)
     unicode-display_width (1.4.1)
 
 PLATFORMS
@@ -33,7 +33,7 @@ DEPENDENCIES
   diva (~> 1.1.1)
   highline (~> 2.0.3)
   rubocop (~> 0.60.0)
-  thor (~> 0.19.1)
+  thor (~> 1.1.0)
 
 BUNDLED WITH
    2.2.30
